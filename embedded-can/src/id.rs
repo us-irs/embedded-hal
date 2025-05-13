@@ -104,6 +104,17 @@ pub enum Id {
     Extended(ExtendedId),
 }
 
+impl Id {
+    /// Returns the CAN Identifier as a raw 32-bit integer.
+    #[inline]
+    pub fn as_raw(&self) -> u32 {
+        match self {
+            Id::Standard(id) => id.as_raw() as u32,
+            Id::Extended(id) => id.as_raw(),
+        }
+    }
+}
+
 /// Implement `Ord` according to the CAN arbitration rules
 ///
 /// When performing arbitration, frames are looked at bit for bit starting
